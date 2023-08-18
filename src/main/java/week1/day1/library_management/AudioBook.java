@@ -1,14 +1,11 @@
-package week1.day1;
+package week1.day1.library_management;
 
 import java.util.Date;
 
-public class Book extends Item implements Readable {
+public class AudioBook extends Item implements Playable {
 
-    private String contents;
-
-    public Book(String title, String uniqueID, String contents, Date publishDate) {
-        super(title, uniqueID,publishDate);
-        this.contents = contents;
+    public AudioBook(String title, String uniqueID,Date publishDate) {
+        super(title, uniqueID,  publishDate);
     }
 
     @Override
@@ -31,13 +28,8 @@ public class Book extends Item implements Readable {
         }
     }
 
-    public void getContents() {
-        System.out.println("Contents of this book: " + contents);
-    }
-
     @Override
-    public void read() {
-        //read book with volume v and speed s
-        System.out.println("read book"+contents);
+    public void play(int volume) {
+        System.out.println("Playing the audio book with volume : "+volume + title);
     }
 }

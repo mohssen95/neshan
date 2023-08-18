@@ -1,4 +1,4 @@
-package week1.day1;
+package week1.day1.library_management;
 
 public interface Playable {
 
