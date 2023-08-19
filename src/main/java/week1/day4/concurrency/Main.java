@@ -86,10 +86,9 @@ public class Main {
 
         Arrays.stream(deposit).forEach(System.out::println);
         System.out.println("compare two deposits:");
-        System.out.println(Arrays.toString(
-                Arrays.stream(deposit)
-                        .flatMap(x -> Arrays.stream(depositBackup).map(y -> x - y))
-                        .toArray()));
+        for (int i = 0; i < deposit.length; i++) {
+            System.out.println(deposit[i]+depositBackup[i]);
+        }
 
 
     }

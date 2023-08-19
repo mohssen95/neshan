@@ -27,9 +27,7 @@ public class ComputeTransactions implements Runnable {
         Transaction assignedTransaction;
         while (true) {
             try {
-                lock.lock();
                 assignedTransaction = transactions.poll();
-                lock.unlock();
                 if (assignedTransaction == null) {
                     break;
                 }
