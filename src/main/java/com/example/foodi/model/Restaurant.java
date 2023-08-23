@@ -1,11 +1,14 @@
 package com.example.foodi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
     private int id;
     private String name;
+    @JsonIgnore()
     private List<Food>menu;
 
     public Restaurant(int id, String name, ArrayList<Food> menu) {
@@ -44,4 +47,6 @@ public class Restaurant {
         //if can do order return true
         return true;
     }
+
+
 }

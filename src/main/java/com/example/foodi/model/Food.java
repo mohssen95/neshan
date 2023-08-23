@@ -1,11 +1,11 @@
 package com.example.foodi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Food {
     private int foodId;
     private String foodName;
-
     private long price;
-
 
     public int getFoodId() {
         return foodId;

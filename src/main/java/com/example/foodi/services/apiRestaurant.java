@@ -3,9 +3,8 @@ package com.example.foodi.services;
 import com.example.foodi.db.daoRestaurant;
 import com.example.foodi.model.Food;
 import com.example.foodi.model.Restaurant;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.catalina.mbeans.SparseUserDatabaseMBean;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +27,23 @@ public class apiRestaurant {
         System.out.println("in here");
 
         return this.daoRestaurant.getMenus(id);
+    }
+
+    @DeleteMapping(path = "/restaurants/{rid}/owner/{oid}")
+    public boolean removeRestaurant(@PathVariable("rid") int rid,@PathVariable("oid") int oid){
+        System.out.println("in here");
+        return daoRestaurant.removeRestaurant(rid,oid);
+    }
+
+    @PatchMapping(path = "restaurants/{oid}/menu/food/{fid}/price/{pric}")
+    public boolean updatePriceFood(@PathVariable int oid,@PathVariable int fid,@PathVariable int pric){
+     return daoRestaurant.updatePriceFood(oid,fid,pric);
+    }
+
+
+    @PostMapping(path = "/restaurants/{id}/menu/add")
+    public boolean addFood(@PathVariable int id,@RequestBody Food f){
+        return daoRestaurant.addFood(id,f);
     }
 
 
