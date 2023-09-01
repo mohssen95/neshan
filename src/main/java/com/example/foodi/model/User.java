@@ -1,40 +1,35 @@
 package com.example.foodi.model;
 
-import java.util.List;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Entity
+@Table(name = "userTable")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-    private int userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
+
+    @Column(name = "username",unique = true)
+    private String username;
+    private String password;
     private String name;
-    private String address;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
-    public User(int userId, String name, String address) {
-        this.userId=userId;
-        this.name=name;
-        this.address=address;
-    }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }

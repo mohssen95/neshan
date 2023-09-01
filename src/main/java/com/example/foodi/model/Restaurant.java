@@ -1,52 +1,34 @@
 package com.example.foodi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Restaurant {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int resId;
+    @Column(name = "res_name")
     private String name;
-    @JsonIgnore()
-    private List<Food>menu;
 
-    public Restaurant(int id, String name, ArrayList<Food> menu) {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "restaurant_id")
+    private Set<Food> menu = new HashSet<>();
+    @Column(name = "res_ownerId")
+    private long ownerId;
 
-        this.id = id;
-        this.name = name;
-        this.menu=menu;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Food> getMenu() {
-
-        return menu;
-    }
-
-    public void setMenu(List<Food> menu) {
-        this.menu = menu;
-    }
-
-    public boolean addOrder(List<Integer> foods) {
-        //if can do order return true
-        return true;
-    }
-
+    @OneToOne
+    @JoinColumn(name = "res_address")
+    private Address address;
 
 }
