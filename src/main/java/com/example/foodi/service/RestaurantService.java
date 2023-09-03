@@ -1,5 +1,6 @@
 package com.example.foodi.service;
 
+import com.example.foodi.dto.RestaurantDto;
 import com.example.foodi.model.Food;
 import com.example.foodi.model.Restaurant;
 
@@ -10,5 +11,14 @@ public interface RestaurantService {
     Restaurant addRestaurant(Restaurant restaurant);
     Optional<Restaurant> getReataurant(Long id);
     List<Food> getMenu(Long id);
-    List<Restaurant>getAll();
+    List<RestaurantDto> getAll();
+
+
+    boolean removeRestaurant(long rid, long oid);
+
+    List<String> findMostCheapRestaurant();
+    Restaurant updatePriceFood(long rid, int fid, long pric);
+
+    Restaurant addFood(long id, Food f);
+    List<?> getTopResByNumOfOrder();
 }

@@ -19,4 +19,5 @@ public class Food {
     private int foodId;
     private String foodName;
     private long price;
+
 }

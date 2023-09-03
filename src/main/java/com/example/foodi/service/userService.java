@@ -1,6 +1,7 @@
 package com.example.foodi.service;
 
 import com.example.foodi.model.User;
+import com.example.foodi.dto.UserDto;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ public interface userService {
 
 
     void deleteUserById(long userId);
-    List<User> getAllUsers();
+    List<UserDto> getAllUsers();
     List<User> getAllUsersByName(String name);
+    User getUserByUsername(String username);
+    void editUsername(long id,String username);
 }

@@ -6,29 +6,34 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "restaurant_table")
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int resId;
+    private long restaurant_id;
     @Column(name = "res_name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "restaurant_id")
-    private Set<Food> menu = new HashSet<>();
-    @Column(name = "res_ownerId")
+    private List<Food> menu=new ArrayList<>();
+    @Column(name = "res_ownerId",unique = true)
     private long ownerId;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "res_address")
+
     private Address address;
+
+
+
 
 }
