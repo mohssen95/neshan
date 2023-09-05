@@ -1,6 +1,6 @@
 package com.example.foodi.service.impl;
 
-import com.example.foodi.dto.AutoRestaurantMapper;
+import com.example.foodi.dto.impl.AutoRestaurantMapper;
 import com.example.foodi.dto.RestaurantDto;
 import com.example.foodi.model.Food;
 import com.example.foodi.model.Restaurant;
@@ -56,7 +56,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public boolean removeRestaurant(long rid, long oid) {
 
-        if(restaurantRepository.getReferenceById(rid).getOwnerId()==oid) {
+        if(restaurantRepository.getReferenceById(rid).getOwnerUser().getUserId()==oid) {
             restaurantRepository.delete(restaurantRepository.getReferenceById(rid));
         return true;}
         else return false;

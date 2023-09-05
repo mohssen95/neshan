@@ -1,8 +1,7 @@
 package com.example.foodi.dto;
 
-import com.example.foodi.model.Address;
+import com.example.foodi.model.enums.Role;
 import lombok.*;
-
 @Setter
 @Getter
 @NoArgsConstructor
@@ -11,7 +10,10 @@ import lombok.*;
 public class UserDto {
 
     private String username;
+    private String password;
     private String name;
-    private Address address;
+    private String address;
+    private Role role;
+
 
 }

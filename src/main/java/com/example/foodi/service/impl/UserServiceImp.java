@@ -1,7 +1,7 @@
 package com.example.foodi.service.impl;
 
-import com.example.foodi.dto.AutoUserMapper;
 import com.example.foodi.dto.UserDto;
+import com.example.foodi.dto.impl.AutoUserMapper;
 import com.example.foodi.model.User;
 import com.example.foodi.repo.UserRepoitory;
 import com.example.foodi.service.userService;
@@ -30,26 +30,26 @@ public class UserServiceImp implements userService {
 
 
     @Override
-    public User addUser(User user) {
-        return userRepository.save(user);
+    public UserDto signupUser(UserDto user) {
+        User newUser=AutoUserMapper.MAPPER.mapToUser(user);
+        return AutoUserMapper.MAPPER.mapToUserDto(userRepository.save(newUser));
     }
 
     @Override
-    public User getUserById(long userId) {
-        return (User) userRepository.findUserByUserId(userId);
+    public UserDto getUserById(long userId) {
+        return  AutoUserMapper.MAPPER.mapToUserDto(userRepository.findUserByUserId(userId));
     }
 
 
     @Override
-    public User updateUser(Long id,User user) {
-
-        user.setUserId(id);
-        return userRepository.save(user);
+    public UserDto updateUser(Long id,UserDto user) {
+        User user1=AutoUserMapper.MAPPER.mapToUser(user);
+        user1.setUserId(id);
+        return AutoUserMapper.MAPPER.mapToUserDto(userRepository.save(user1));
     }
 
     @Override
     public void deleteUserById(long userId) {
-        verifyUser(userId);
         userRepository.deleteById(userId);
     }
 
@@ -61,16 +61,13 @@ public class UserServiceImp implements userService {
         return users.stream().map(user->AutoUserMapper.MAPPER.mapToUserDto(user))
                 .collect(Collectors.toList());    }
     @Override
-    public List<User> getAllUsersByName(String name) {
-        return userRepository.getAllByName(name);
+    public List<UserDto> getAllUsersByName(String name) {
+
+        return
+        userRepository.getAllByName(name).stream()
+                .map(u->AutoUserMapper.MAPPER.mapToUserDto(u))
+                .collect(Collectors.toList());
     }
 
-
-
-    User verifyUser(long userId){
-        User user = userRepository.findById(userId)
-                .orElseThrow(()-> new IllegalArgumentException("No User found for the given id - " + userId));
-        return user;
-    }
 
 }

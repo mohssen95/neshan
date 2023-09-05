@@ -1,8 +1,4 @@
 
-_
-/src/main/java/com/example/foodi/model/Role.java,c\e\ceca9609365fdbcaab8cb749aeb73b0436239de3
-b
-2src/main/java/com/example/foodi/model/Address.java,2\d\2d23903919084a526b3fed219c54a204a5914411
 `
 0src/main/java/com/example/foodi/model/Order.java,2\6\26430298dbc1adf8a1105e721c082c2b3b5791b4
 r
@@ -15,8 +11,6 @@ e
 5src/main/java/com/example/foodi/FoodiApplication.java,4\5\459ddf75a24eeb8615547a4d8b4660cff2ee5a5d
 `
 0src/main/java/com/example/foodi/dto/UserDto.java,b\3\b3cc6c7fc00dbb0e965c94f685ef2002193b722d
-m
-=src/main/java/com/example/foodi/dto/AutoRestaurantMapper.java,b\c\bc5f721fe42918ae4b70a904ef9e4d210669b6fe
 a
 1src/main/java/com/example/foodi/api/ApiOrder.java,c\e\ce82d9fdc68d81f9cef6e81ace3898b3d8832f53
 f
@@ -27,8 +21,6 @@ _
 /src/main/java/com/example/foodi/model/User.java,8\c\8c7cc71f5fb235dc3479e8685d35430552a5b681
 f
 6src/main/java/com/example/foodi/dto/RestaurantDto.java,0\3\0377fb93e9b8f8314e11fe8b5d7167cd75ddaf35
-g
-7src/main/java/com/example/foodi/dto/AutoUserMapper.java,8\9\89d1c5b3f0360525b2b5865be6b6fc8a0aa137ea
 `
 0src/main/java/com/example/foodi/api/ApiUser.java,8\3\8347d0fda99ec5c628869cd555f53a9c81e51a14
 h
@@ -47,3 +39,21 @@ g
 7src/main/java/com/example/foodi/repo/UserRepoitory.java,d\d\dde3889befa091be050d77ed354b52c241621049
 n
 >src/main/java/com/example/foodi/repo/RestaurantRepository.java,6\c\6cb139e569c7807c09efc638d2d6a9b9bed3c42b
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+k
+;src/main/java/com/example/foodi/model/enums/OrderState.java,6\8\68da367924a65452acd5685996a50d6b4f692d66
+e
+5src/main/java/com/example/foodi/model/enums/Role.java,c\6\c60713c82b33b517580591637199ec58e5c983bb
+i
+9src/main/java/com/example/foodi/model/enums/FoodType.java,2\2\22586e97a28d5f28f82db0a659f955726f57463e
+d
+4src/main/java/com/example/foodi/model/OrderInfo.java,3\1\312ed00a26482c7178e6ed331fe6958a44729bee
+c
+3src/main/java/com/example/foodi/model/Address1.java,3\b\3b695c5f05d495cbbe4afb4bf1a793976af082d9
+l
+<src/main/java/com/example/foodi/dto/impl/AutoUserMapper.java,1\0\10433d2d206fd82b8a269b74d3ac5d8c9ae08edf
+r
+Bsrc/main/java/com/example/foodi/dto/impl/AutoRestaurantMapper.java,6\9\691fe601945b015ab9ebe8b4fcf369edf71d9c74

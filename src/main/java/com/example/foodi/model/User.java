@@ -1,6 +1,7 @@
 package com.example.foodi.model;
 
 
+import com.example.foodi.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,19 +18,21 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private Long userId;
-
     @Column(name = "username",unique = true)
     private String username;
+    @Column(name = "password")
     private String password;
+    @Column(name = "name")
     private String name;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "address_owner")
+//    private Set<Address> address;
     @Enumerated(EnumType.STRING)
     private Role role;
 
-
+    @Column(name = "address")
+    private String address;
 
 }

@@ -1,0 +1,13 @@
+package com.example.foodi.model.enums;
+
+public enum OrderState {
+
+    ORDER_PREPARING,
+    ORDER_CANCELED_BY_RESTAURANT,
+    ORDER_CANCELED_BY_USER,
+    ORDER_IS_READY,
+    ORDER_IS_DELIVERING,
+    ORDER_ACCEPTED_BY_USER,
+    ORDER_REJECTED_BY_USER
+
+}

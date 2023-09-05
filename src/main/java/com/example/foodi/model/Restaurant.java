@@ -16,24 +16,30 @@ import java.util.List;
 @Setter
 @Table(name = "restaurant_table")
 public class Restaurant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "restaurant_id")
     private long restaurant_id;
-    @Column(name = "res_name")
+    @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Column(name = "rate")
+    private float rate;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     private List<Food> menu=new ArrayList<>();
-    @Column(name = "res_ownerId",unique = true)
-    private long ownerId;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "res_address")
+    @JoinColumn(name = "owner",unique = true,nullable = false)
+    private User ownerUser;
 
-    private Address address;
-
-
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "address_owner",unique = true)
+//    private Set<Address> address;
+    @Column(name = "address")
+    private String address;
 
 
 }
