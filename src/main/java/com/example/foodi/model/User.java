@@ -1,21 +1,25 @@
 package com.example.foodi.model;
 
 
-import com.example.foodi.model.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import lombok.*;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "user_table")
-public class User {
+@RequiredArgsConstructor
+@Table(name = "user_table",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
@@ -26,13 +30,24 @@ public class User {
     private String password;
     @Column(name = "name")
     private String name;
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "address_owner")
-//    private Set<Address> address;
-    @Enumerated(EnumType.STRING)
-    private Role role;
 
     @Column(name = "address")
     private String address;
 
+    @Column(name = "email")
+    @Email
+    private String email;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+
+    public User(String username, String email, String encode) {
+    this.username=username;
+    this.email=email;
+    this.password=encode;
+    }
 }

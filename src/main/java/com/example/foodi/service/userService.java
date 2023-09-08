@@ -1,20 +1,24 @@
 package com.example.foodi.service;
 
-import com.example.foodi.dto.UserDto;
 import com.example.foodi.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface userService {
-    UserDto signupUser(UserDto user);
-    UserDto getUserById(long userId);
-    UserDto updateUser(Long id,UserDto user);
+    void editUsername(long id, String username);
 
+    Boolean existsByUsername(String username);
+
+    Boolean existsByEmail(String email);
+
+    User signupUser(User user);
+    User getUserById(long userId);
+    User updateUser(Long id,User user);
+    Optional<User> findByUsername(String username);
 
     void deleteUserById(long userId);
-    List<UserDto> getAllUsers();
-    List<UserDto> getAllUsersByName(String name);
-    User getUserByUsername(String username);
-    void editUsername(long id,String username);
+    List<User> getAllUsers();
 
+    List<User> getAllUsersByName(String name);
 }

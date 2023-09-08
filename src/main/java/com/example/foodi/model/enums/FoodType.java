@@ -1,5 +1,6 @@
 package com.example.foodi.model.enums;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

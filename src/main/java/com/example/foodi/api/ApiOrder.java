@@ -15,10 +15,6 @@ import java.util.Optional;
 @RequestMapping("/api/orders")
 public class ApiOrder {
 
-    //add order
-    //cancel order
-    //ORDER TRACKING
-
 
     //get all order from specific
     @Autowired

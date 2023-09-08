@@ -1,6 +1,6 @@
 package com.example.foodi.api;
 
-import com.example.foodi.dto.UserDto;
+import com.example.foodi.model.User;
 import com.example.foodi.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,20 +19,20 @@ public class ApiUser {
     userService userService;
 
     @GetMapping()
-    ResponseEntity<List<UserDto>> getUsers() {
-            List<UserDto> users = userService.getAllUsers();
+    ResponseEntity<List<User>> getUsers() {
+            List<User> users = userService.getAllUsers();
             return ResponseEntity.ok(users);
 
     }
 
     @PostMapping(path = "/signup")
-    ResponseEntity<UserDto> addUser(@RequestBody UserDto user) {
+    ResponseEntity<User> addUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.signupUser(user));
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<UserDto> getUserById(@PathVariable("id") long userId) {
-        UserDto user = userService.getUserById(userId);
+    ResponseEntity<User> getUserById(@PathVariable("id") long userId) {
+        User user = userService.getUserById(userId);
         return ResponseEntity.ok(user);
     }
 
@@ -50,8 +50,8 @@ public class ApiUser {
 //    }
 
     @PutMapping("/update/{id}")
-    ResponseEntity<UserDto> updateUser(@PathVariable("id") long id, @RequestBody UserDto user) {
-            UserDto response=userService.updateUser(id, user);
+    ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) {
+            User response=userService.updateUser(id, user);
             return ResponseEntity.ok(response);
     }
 

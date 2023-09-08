@@ -1,18 +1,27 @@
 package com.example.foodi.dto;
 
-import com.example.foodi.model.Food;
-import lombok.*;
+import com.example.foodi.model.Restaurant;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class RestaurantDto {
+
+public class RestaurantDto  {
 
     private String name;
-    private List<Food> menu=new ArrayList<>();
+    private List<FoodDto> menu=new ArrayList<>();
     private String address;
+
+    public RestaurantDto(Restaurant restaurant) {
+        this.name = restaurant.getName();
+        this.address = restaurant.getAddress();
+    }
 }

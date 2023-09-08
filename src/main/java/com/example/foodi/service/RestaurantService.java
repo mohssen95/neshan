@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface RestaurantService {
     Restaurant addRestaurant(Restaurant restaurant);
-    Optional<Restaurant> getReataurant(Long id);
+    Optional<RestaurantDto> getReataurant(Long id);
     List<Food> getMenu(Long id);
     List<RestaurantDto> getAll();
 

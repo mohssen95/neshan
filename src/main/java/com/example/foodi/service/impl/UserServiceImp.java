@@ -1,22 +1,20 @@
 package com.example.foodi.service.impl;
 
-import com.example.foodi.dto.UserDto;
-import com.example.foodi.dto.impl.AutoUserMapper;
 import com.example.foodi.model.User;
-import com.example.foodi.repo.UserRepoitory;
+import com.example.foodi.repo.UserRepository;
 import com.example.foodi.service.userService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class UserServiceImp implements userService {
     @Autowired
-    UserRepoitory userRepository;
+    UserRepository userRepository;
 
     public User getUserByUsername(String userame){
         return userRepository.findUserByUserName(userame);
@@ -28,24 +26,39 @@ public class UserServiceImp implements userService {
          userRepository.editUsername(id, username);
     }
 
-
     @Override
-    public UserDto signupUser(UserDto user) {
-        User newUser=AutoUserMapper.MAPPER.mapToUser(user);
-        return AutoUserMapper.MAPPER.mapToUserDto(userRepository.save(newUser));
+    public Boolean existsByUsername(String username) {
+        return null;
     }
 
     @Override
-    public UserDto getUserById(long userId) {
-        return  AutoUserMapper.MAPPER.mapToUserDto(userRepository.findUserByUserId(userId));
+    public Boolean existsByEmail(String email) {
+        return null;
     }
 
 
     @Override
-    public UserDto updateUser(Long id,UserDto user) {
-        User user1=AutoUserMapper.MAPPER.mapToUser(user);
+    public User signupUser(User user) {
+        User newUser=(user);
+        return (userRepository.save(newUser));
+    }
+
+    @Override
+    public User getUserById(long userId) {
+        return  (userRepository.findUserByUserId(userId));
+    }
+
+
+    @Override
+    public User updateUser(Long id,User user) {
+        User user1=(user);
         user1.setUserId(id);
-        return AutoUserMapper.MAPPER.mapToUserDto(userRepository.save(user1));
+        return (userRepository.save(user1));
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return Optional.empty();
     }
 
     @Override
@@ -54,19 +67,16 @@ public class UserServiceImp implements userService {
     }
 
     @Override
-    public List<UserDto> getAllUsers() {
+    public List<User> getAllUsers() {
         List<User> users = userRepository.findAll();
 
 
-        return users.stream().map(user->AutoUserMapper.MAPPER.mapToUserDto(user))
-                .collect(Collectors.toList());    }
+        return users;    }
     @Override
-    public List<UserDto> getAllUsersByName(String name) {
+    public List<User> getAllUsersByName(String name) {
 
         return
-        userRepository.getAllByName(name).stream()
-                .map(u->AutoUserMapper.MAPPER.mapToUserDto(u))
-                .collect(Collectors.toList());
+        userRepository.getAllByName(name);
     }
 
 

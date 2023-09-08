@@ -7,6 +7,8 @@ import com.example.foodi.model.Restaurant;
 import com.example.foodi.repo.RestaurantRepository;
 import com.example.foodi.service.RestaurantService;
 import jakarta.transaction.Transactional;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +23,34 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Autowired
     RestaurantRepository restaurantRepository;
 
+    @Autowired
+    RedissonClient redissonClient;
+
     @Override
     public Restaurant addRestaurant(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }
 
     @Override
-    public Optional<Restaurant> getReataurant(Long id) {
-        return restaurantRepository.findById(id);
+    public Optional<RestaurantDto> getReataurant(Long id) {
+
+        RBucket<RestaurantDto> bucket = redissonClient.getBucket("rest-" + id);
+
+        if (bucket.isExists()) {
+            return Optional.of(bucket.get());
+        }
+
+        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
+
+        //put to cache server
+        restaurantOptional.ifPresent(restaurant -> {
+            bucket.set(new RestaurantDto(restaurant));
+        });
+
+//        System.out.println(AutoRestaurantMapper.INSTANCE.mapToRestaurantDto(restaurantOptional.get()));
+        Optional<RestaurantDto> restaurantDtoOptional = restaurantOptional.map(RestaurantDto::new);
+
+        return restaurantDtoOptional;
     }
 
     @Override
@@ -48,7 +70,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<RestaurantDto> getAll() {
 
         List<Restaurant> restaurants=restaurantRepository.findAll();
-        return restaurants.stream().map(restaurant -> AutoRestaurantMapper.MAPPER.mapToRestaurantDto(restaurant))
+        return restaurants.stream().map(restaurant -> AutoRestaurantMapper.INSTANCE.mapToRestaurantDto(restaurant))
                 .collect(Collectors.toList());
     }
 
